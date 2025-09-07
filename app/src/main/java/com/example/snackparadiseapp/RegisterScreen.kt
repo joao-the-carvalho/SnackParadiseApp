@@ -1,5 +1,6 @@
 package com.example.snackparadiseapp
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,6 +30,9 @@ fun RegisterScreen(onRegisterComplete: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+    val dbHelper = remember { UserDatabaseHelper(context) }
 
     val gradient = Brush.verticalGradient(
         colors = listOf(
@@ -125,7 +130,21 @@ fun RegisterScreen(onRegisterComplete: () -> Unit) {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
-                    onClick = { onRegisterComplete() },
+                    onClick = {
+                        if (username.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
+                            Toast.makeText(context, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+                        } else if (password != confirmPassword) {
+                            Toast.makeText(context, "Senhas não coincidem!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val success = dbHelper.insertUser(username, email, password)
+                            if (success) {
+                                Toast.makeText(context, "Cadastro realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                                onRegisterComplete()
+                            } else {
+                                Toast.makeText(context, "Erro: usuário já existe!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),

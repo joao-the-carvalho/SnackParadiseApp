@@ -1,6 +1,7 @@
 package com.example.snackparadiseapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,6 +12,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
@@ -70,9 +72,13 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("cadastrarProduto") {
+                            val dbHelper = remember { UserDatabaseHelper(this as Context) }
+
                             CadastrarProdutoScreen(
-                                onRegisterComplete = { navController.popBackStack() }
+                                onRegisterComplete = { /* navegação ou mensagem */ },
+                                dbHelper = dbHelper
                             )
+
                         }
                         composable("listarProdutos") {
                             ListarProdutosScreen(onBack = { navController.popBackStack() })

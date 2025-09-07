@@ -1,5 +1,6 @@
 package com.example.snackparadiseapp
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,9 +12,11 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,10 +25,15 @@ import androidx.compose.ui.unit.sp
 import com.example.snackparadiseapp.R
 
 @Composable
-fun CadastrarProdutoScreen(onRegisterComplete: () -> Unit) {
-    var produto by remember { mutableStateOf("") }
-    var quantidade by remember { mutableStateOf("") }
-    var descricao by remember { mutableStateOf("") }
+fun CadastrarProdutoScreen(
+    onRegisterComplete: () -> Unit,
+    dbHelper: UserDatabaseHelper
+) {
+    val context = LocalContext.current
+
+    var produto by rememberSaveable { mutableStateOf("") }
+    var quantidade by rememberSaveable { mutableStateOf("") }
+    var descricao by rememberSaveable { mutableStateOf("") }
 
     val gradient = Brush.verticalGradient(
         colors = listOf(
@@ -110,7 +118,32 @@ fun CadastrarProdutoScreen(onRegisterComplete: () -> Unit) {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Button(
-                    onClick = { onRegisterComplete() },
+                    onClick = {
+                        // validação simples
+                        if (produto.isBlank() || quantidade.isBlank()) {
+                            Toast.makeText(context, "Preencha todos os campos", Toast.LENGTH_SHORT).show()
+                            return@Button
+                        }
+
+                        val qnt = quantidade.toIntOrNull()
+                        if (qnt == null || qnt <= 0) {
+                            Toast.makeText(context, "Digite uma quantidade válida", Toast.LENGTH_SHORT).show()
+                            return@Button
+                        }
+
+                        val sucesso = try {
+                            dbHelper.insertItens(produto, qnt, descricao)
+                        } finally {
+                            dbHelper.close() // fecha o banco automaticamente
+                        }
+
+                        if (sucesso) {
+                            Toast.makeText(context, "Produto cadastrado com sucesso", Toast.LENGTH_SHORT).show()
+                            onRegisterComplete()
+                        } else {
+                            Toast.makeText(context, "Erro ao cadastrar produto", Toast.LENGTH_SHORT).show()
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
