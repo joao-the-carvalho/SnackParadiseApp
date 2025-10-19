@@ -3,189 +3,174 @@ package com.snackparadise.presentation.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PedalBike
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.snackparadise.R
-import com.snackparadise.presentation.nav.Screen
+import coil.compose.rememberAsyncImagePainter
+import com.snackparadise.data.model.MenuItem
+import com.snackparadise.data.repository.MenuRepositoryImpl
+import kotlinx.coroutines.launch
+
 
 @Composable
-fun OrderTypeScreen(navController: NavController) {
-    Scaffold(
-        topBar = {
+fun MenuScreen(
+    navController: NavController,
+    viewModel: MenuViewModel
+) {
+    val menuItems = viewModel.menuItems
+
+    Surface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(Color(0xFF000000), Color(0xFF220000), Color(0xFF000000))
+                    )
+                )
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+        ) {
+            // Top bar
             Surface(
-                color = Color.Black,
+                color = Color(0xFF0D0D0D),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(vertical = 18.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = "Snack Paradise",
                         color = Color.White,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.sp
                     )
                 }
             }
-        }
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(Color.Black, Color(0xFFA20908), Color.Black)
-                    )
-                )
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(
-                text = "Como Você Gostaria\nDo Seu Pedido Hoje?",
-                color = Color.White,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                lineHeight = 36.sp
-            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Surface(
-                color = Color.Yellow,
-                modifier = Modifier
-                    .width(250.dp)
-                    .height(4.dp)
-            ) {}
-
-            Spacer(modifier = Modifier.height(60.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                OrderOptionButton(
-                    title = "Delivery",
-                    icon = Icons.Default.PedalBike,
-                    onClick = { navController.navigate(Screen.Menu.route) }
-                )
-
-                Spacer(modifier = Modifier.width(40.dp))
-
-                OrderOptionButton(
-                    title = "Peça e Retire",
-                    icon = Icons.Default.Place,
-                    onClick = { navController.navigate(Screen.Menu.route) }
-                )
-            }
-
-            Spacer(modifier = Modifier.height(60.dp))
-
-            Image(
-                painter = painterResource(id = R.drawable.burger_sample),
-                contentDescription = "Hambúrguer delicioso",
-                modifier = Modifier
-                    .size(300.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .shadow(16.dp, shape = RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
-            )
-
-            Spacer(modifier = Modifier.height(40.dp))
-        }
-    }
-}
-
-@Composable
-fun OrderOptionButton(
-    title: String,
-    icon: ImageVector,
-    onClick: () -> Unit
-) {
-    Surface(
-        color = Color(0xFFA20908),
-        modifier = Modifier
-            .size(180.dp)
-            .shadow(16.dp, shape = RoundedCornerShape(25.dp))
-            .clickable { onClick() },
-        shape = RoundedCornerShape(25.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = title,
-                tint = Color.White,
-                modifier = Modifier.size(80.dp)
+            Text(
+                text = "Nosso Cardápio",
+                color = Color.White,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = title,
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            )
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(menuItems) { item ->
+                    MenuItemCard(item) {
+                        // ação ao clicar no item, se quiser
+                    }
+                }
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
+class MenuViewModel(
+    private val repository: MenuRepositoryImpl
+) : ViewModel() {
+
+    var menuItems by mutableStateOf<List<MenuItem>>(emptyList())
+        private set
+
+    init {
+        viewModelScope.launch {
+            menuItems = repository.getMenu()
+        }
+    }
+}
+
 @Composable
-fun OrderTypeScreenPreview() {
-    MaterialTheme {
-        OrderTypeScreen(rememberNavController())
+fun MenuItemCard(
+    item: MenuItem,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(20.dp))
+            .background(Color(0xFF111111))
+            .clickable { onClick() }
+            .shadow(16.dp, RoundedCornerShape(20.dp))
+            .padding(16.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = rememberAsyncImagePainter("file:///android_asset/${item.imageUrl}"),
+                contentDescription = item.name,
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = item.name,
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+
+                if (item.description.isNotEmpty()) {
+                    Text(
+                        text = item.description,
+                        color = Color.Gray,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+
+                Text(
+                    text = "R$ ${item.price}",
+                    color = Color(0xFFFFC107),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
+            }
+        }
     }
 }
