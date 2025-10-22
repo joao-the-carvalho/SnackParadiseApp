@@ -12,10 +12,13 @@ fun NavGraph(startDestination: String = Screen.Landing.route) {
 
     NavHost(navController, startDestination) {
         composable(Screen.Landing.route) {
-            LandingScreen { navController.navigate(Screen.Menu.route) }
+            LandingScreen { navController.navigate(Screen.OrderType.route) }
+        }
+        composable(Screen.OrderType.route) {
+            OrderTypeScreen(navController)
         }
         composable(Screen.Menu.route) {
-            OrderTypeScreen { navController.navigate(Screen.Checkout.route) }
+            MenuScreen(navController)
         }
         composable(Screen.Checkout.route) {
             CheckoutScreen()

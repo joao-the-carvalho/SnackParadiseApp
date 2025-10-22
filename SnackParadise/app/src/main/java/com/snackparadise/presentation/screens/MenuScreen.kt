@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,17 +34,29 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.snackparadise.data.local.AssetsRepository
 import com.snackparadise.data.model.MenuItem
 import com.snackparadise.data.repository.MenuRepositoryImpl
+import com.snackparadise.presentation.viewmodel.MenuViewModel
+import com.snackparadise.presentation.viewmodel.MenuViewModelFactory
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun MenuScreen(
     navController: NavController,
-    viewModel: MenuViewModel
+    viewModel: MenuViewModel = viewModel()
 ) {
+    val context = LocalContext.current
+    val assetsRepository = AssetsRepository(context)
+    val repository = MenuRepositoryImpl(assetsRepository)
+
+    val viewModel: MenuViewModel = viewModel(
+        factory = MenuViewModelFactory(repository)
+    )
+
     val menuItems = viewModel.menuItems
+
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -106,19 +119,6 @@ fun MenuScreen(
     }
 }
 
-class MenuViewModel(
-    private val repository: MenuRepositoryImpl
-) : ViewModel() {
-
-    var menuItems by mutableStateOf<List<MenuItem>>(emptyList())
-        private set
-
-    init {
-        viewModelScope.launch {
-            menuItems = repository.getMenu()
-        }
-    }
-}
 
 @Composable
 fun MenuItemCard(
