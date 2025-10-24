@@ -25,34 +25,19 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
-import com.snackparadise.data.local.AssetsRepository
 import com.snackparadise.data.model.MenuItem
-import com.snackparadise.data.repository.MenuRepositoryImpl
 import com.snackparadise.presentation.components.AppScaffold
 import com.snackparadise.presentation.viewmodel.MenuViewModel
 import com.snackparadise.presentation.viewmodel.MenuViewModelFactory
 
-
 @Composable
-fun MenuScreen(
-    navController: NavController,
-    viewModel: MenuViewModel = viewModel()
-) {
+fun MenuScreen(navController: NavController) {
+    val context = LocalContext.current
+    val viewModel: MenuViewModel = viewModel(factory = MenuViewModelFactory(context))
+    val menuItems = viewModel.menuItems
+
     AppScaffold(navController = navController, selectedItem = "Menu") {
-        val context = LocalContext.current
-        val assetsRepository = AssetsRepository(context)
-        val repository = MenuRepositoryImpl(assetsRepository)
-
-        val viewModel: MenuViewModel = viewModel(
-            factory = MenuViewModelFactory(repository)
-        )
-
-        val menuItems = viewModel.menuItems
-
-
-        Surface(
-            modifier = Modifier.fillMaxSize()
-        ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -103,72 +88,67 @@ fun MenuScreen(
                 ) {
                     items(menuItems) { item ->
                         MenuItemCard(item) {
-                            // ação ao clicar no item, se quiser
+                            // ação ao clicar no item
                         }
                     }
                 }
             }
         }
     }
+}
 
-
-    @Composable
-    fun MenuItemCard(
-        item: MenuItem,
-        onClick: () -> Unit
+// agora o MenuItemCard tá fora do MenuScreen
+@Composable
+fun MenuItemCard(
+    item: MenuItem,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(20.dp))
+            .background(Color(0xFF111111))
+            .clickable { onClick() }
+            .shadow(16.dp, RoundedCornerShape(20.dp))
+            .padding(16.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(20.dp))
-                .background(Color(0xFF111111))
-                .clickable { onClick() }
-                .shadow(16.dp, RoundedCornerShape(20.dp))
-                .padding(16.dp)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Image(
-                    painter = rememberAsyncImagePainter("file:///android_asset/${item.imageUrl}"),
-                    contentDescription = item.name,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(RoundedCornerShape(16.dp)),
-                    contentScale = ContentScale.Crop
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                painter = rememberAsyncImagePainter("file:///android_asset/${item.imageUrl}"),
+                contentDescription = item.name,
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.Crop
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = item.name,
+                    color = Color.White,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Column(modifier = Modifier.weight(1f)) {
+                if (item.description.isNotEmpty()) {
                     Text(
-                        text = item.name,
-                        color = Color.White,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    if (item.description.isNotEmpty()) {
-                        Text(
-                            text = item.description,
-                            color = Color.Gray,
-                            fontSize = 14.sp,
-                            modifier = Modifier.padding(top = 4.dp)
-                        )
-                    }
-
-                    Text(
-                        text = "R$ ${item.price}",
-                        color = Color(0xFFFFC107),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(top = 8.dp)
+                        text = item.description,
+                        color = Color.Gray,
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(top = 4.dp)
                     )
                 }
+
+                Text(
+                    text = "R$ ${item.price}",
+                    color = Color(0xFFFFC107),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
         }
     }
-}
-
-@Composable
-fun MenuItemCard(x0: MenuItem, content: @Composable () -> Unit) {
-    TODO("Not yet implemented")
 }

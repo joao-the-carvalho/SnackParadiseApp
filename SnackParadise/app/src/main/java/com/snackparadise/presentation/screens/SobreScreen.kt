@@ -37,7 +37,6 @@ import com.snackparadise.presentation.components.AppScaffold
 fun SobreScreen(navController: NavController) {
     AppScaffold(
         navController = navController,
-        title = "Sobre nós",
         selectedItem = "Sobre nós"
     ) {
         Column(
@@ -171,44 +170,6 @@ fun SobreScreen(navController: NavController) {
             }
 
             Spacer(Modifier.height(16.dp))
-
-            // CTA final
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFB71C1C)),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(24.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = "Faça Parte da Nossa História",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 22.sp
-                    )
-                    Spacer(Modifier.height(8.dp))
-                    Text(
-                        text = "Junte-se a nós e descubra por que SnackParadise é mais que um restaurante!",
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(Modifier.height(12.dp))
-                    Button(onClick = { /* TODO abrir cardápio */ }) {
-                        Text("Ver Cardápio")
-                    }
-                    OutlinedButton(
-                        onClick = { /* TODO fazer pedido */ },
-                        border = BorderStroke(1.dp, Color.White),
-                        modifier = Modifier.padding(top = 8.dp)
-                    ) {
-                        Text("Fazer Pedido", color = Color.White)
-                    }
-                }
-            }
-
-            Spacer(Modifier.height(40.dp))
         }
     }
 }

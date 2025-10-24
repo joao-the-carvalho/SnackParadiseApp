@@ -1,6 +1,5 @@
 package com.snackparadise.presentation.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,25 +18,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.snackparadise.presentation.components.AppScaffold
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LandingScreen(onNavigate: () -> Unit) {
+fun LandingScreen(navController: NavController) {
+
     val scroll = rememberScrollState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Snack Paradise", color = Color.Yellow) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF1A0000))
-            )
-        }
-    ) { padding ->
+    // usa o AppScaffold com menu lateral
+    AppScaffold(navController = navController, selectedItem = "home") {
         Column(
             modifier = Modifier
                 .verticalScroll(scroll)
                 .fillMaxSize()
-                .padding(padding)
         ) {
             // --- Seção 1: Boas-vindas ---
             Box(
@@ -99,7 +94,7 @@ fun LandingScreen(onNavigate: () -> Unit) {
                     )
                     Spacer(Modifier.height(24.dp))
                     Button(
-                        onClick = onNavigate,
+                        onClick = { navController.navigate("menu") },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow),
                         shape = RoundedCornerShape(50)
                     ) {
@@ -150,7 +145,7 @@ fun LandingScreen(onNavigate: () -> Unit) {
                     )
                     Spacer(Modifier.height(24.dp))
                     Button(
-                        onClick = onNavigate,
+                        onClick = { navController.navigate("menu") },
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow),
                         shape = RoundedCornerShape(50)
                     ) {

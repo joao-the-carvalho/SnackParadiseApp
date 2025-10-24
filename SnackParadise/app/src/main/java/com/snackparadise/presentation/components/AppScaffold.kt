@@ -1,5 +1,6 @@
 package com.snackparadise.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
@@ -9,13 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScaffold(
-    title: String,
-    onNavigate: (String) -> Unit = {},
+    navController: NavController,
+    selectedItem: String = "",
     content: @Composable () -> Unit
 ) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -38,17 +40,19 @@ fun AppScaffold(
                         .align(Alignment.CenterHorizontally)
                 )
                 Divider(color = Color.White.copy(alpha = 0.3f))
-                DrawerItem("Menu") { onNavigate("menu") }
-                DrawerItem("Pedidos") { onNavigate("orders") }
-                DrawerItem("Perfil") { onNavigate("profile") }
-                DrawerItem("Configurações") { onNavigate("settings") }
+                DrawerItem("Tela Inicial", selectedItem == "landing") { navController.navigate("landing") }
+                DrawerItem("Menu", selectedItem == "menu") { navController.navigate("menu") }
+                DrawerItem("Login/Registro", selectedItem == "logreg") { navController.navigate("logreg") }
+                DrawerItem("Perfil", selectedItem == "profile") { navController.navigate("profile") }
+                DrawerItem("Sobre Nós", selectedItem == "sobre") { navController.navigate("sobre") }
+                DrawerItem("Checkout", selectedItem == "checkout") { navController.navigate("checkout") }
             }
         }
     ) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(title, color = Color.White) },
+                    title = {}, // removido o título
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {
@@ -81,10 +85,13 @@ fun AppScaffold(
 }
 
 @Composable
-private fun DrawerItem(text: String, onClick: () -> Unit) {
+private fun DrawerItem(text: String, selected: Boolean, onClick: () -> Unit) {
+    val backgroundColor = if (selected) Color.White.copy(alpha = 0.2f) else Color.Transparent
     TextButton(
         onClick = onClick,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(backgroundColor)
     ) {
         Text(
             text = text,
