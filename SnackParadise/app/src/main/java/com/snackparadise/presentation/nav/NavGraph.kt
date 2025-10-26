@@ -42,6 +42,9 @@
             composable(Screen.Sobre.route) {
                 SobreScreen(navController)
             }
+            composable(Screen.Pontos.route){
+                PontosScreen(navController)
+            }
         }
 
     }

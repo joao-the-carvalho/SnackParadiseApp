@@ -20,6 +20,7 @@ import androidx.navigation.NavController
 import com.snackparadise.presentation.components.AppScaffold
 import kotlinx.coroutines.delay
 import coil.compose.rememberAsyncImagePainter
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 // --- NOVO COMPOSABLE PARA O CARROSSEL SLIDER ---
 

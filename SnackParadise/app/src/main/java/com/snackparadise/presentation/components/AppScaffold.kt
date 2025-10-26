@@ -46,6 +46,7 @@ fun AppScaffold(
                 DrawerItem("Perfil", selectedItem == "profile") { navController.navigate("profile") }
                 DrawerItem("Sobre Nós", selectedItem == "sobre") { navController.navigate("sobre") }
                 DrawerItem("Checkout", selectedItem == "checkout") { navController.navigate("checkout") }
+                DrawerItem("Pontos", selectedItem == "pontos"){navController.navigate("pontos")}
             }
         }
     ) {
