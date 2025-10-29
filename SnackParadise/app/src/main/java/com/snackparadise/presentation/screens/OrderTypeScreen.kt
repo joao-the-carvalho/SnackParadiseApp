@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,7 +51,7 @@ fun OrderTypeScreen(navController: NavController) {
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Snack Paradise",
+                        text = stringResource(R.string.app_name),
                         color = Color.White,
                         fontSize = 26.sp,
                         fontWeight = FontWeight.Bold,
@@ -74,7 +75,7 @@ fun OrderTypeScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Como você gostaria\ndo seu pedido hoje?",
+                text = stringResource(R.string.order_type_title),
                 color = Color.White,
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
@@ -98,13 +99,13 @@ fun OrderTypeScreen(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 OrderTypeCard(
-                    title = "Delivery",
+                    title = stringResource(R.string.order_type_delivery),
                     icon = Icons.Default.DeliveryDining,
                     onClick = { navController.navigate(Screen.Menu.route) }
                 )
 
                 OrderTypeCard(
-                    title = "Peça e Retire",
+                    title = stringResource(R.string.order_type_pickup),
                     icon = Icons.Default.ShoppingBag,
                     onClick = { navController.navigate(Screen.Menu.route) }
                 )
@@ -114,7 +115,7 @@ fun OrderTypeScreen(navController: NavController) {
 
             Image(
                 painter = painterResource(id = R.drawable.hamburguer_1_1),
-                contentDescription = "Hambúrguer",
+                contentDescription = stringResource(R.string.burger_image_desc),
                 modifier = Modifier
                     .size(280.dp)
                     .clip(RoundedCornerShape(20.dp))
@@ -160,13 +161,5 @@ fun OrderTypeCard(
                 fontWeight = FontWeight.Bold
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun OrderTypeScreenPreview() {
-    MaterialTheme {
-        OrderTypeScreen(rememberNavController())
     }
 }

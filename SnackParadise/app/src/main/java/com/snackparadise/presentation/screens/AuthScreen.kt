@@ -21,11 +21,21 @@ import com.snackparadise.presentation.components.AppScaffold
 import kotlinx.coroutines.delay
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.compose.ui.res.stringResource
+import com.snackparadise.R
+
 
 // --- NOVO COMPOSABLE PARA O CARROSSEL SLIDER ---
 
 @Composable
-fun ImageCarousel(imageList: List<String>) {
+fun ImageCarousel() {
+    // Carrega as strings de imagem
+    val imageList = listOf(
+        stringResource(R.string.slider1),
+        stringResource(R.string.slider2),
+        stringResource(R.string.slider3)
+    )
+
     // Estado para rastrear o índice da imagem atual
     var currentIndex by remember { mutableIntStateOf(0) }
 
@@ -44,7 +54,6 @@ fun ImageCarousel(imageList: List<String>) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            // AUMENTANDO A ALTURA DO CARROSSEL
             .height(250.dp)
             .clip(RoundedCornerShape(20.dp))
             .background(Color(0xFF9F0605)),
@@ -53,47 +62,27 @@ fun ImageCarousel(imageList: List<String>) {
         // Carrega a imagem do asset
         Image(
             painter = rememberAsyncImagePainter("file:///android_asset/$currentImageName"),
-            contentDescription = "Imagem rotativa sobre o Snack Paradise",
-            // ALTERANDO PARA ContentScale.Fit para garantir que a imagem inteira caiba
+            contentDescription = stringResource(R.string.carousel_description),
             contentScale = ContentScale.Fit,
             modifier = Modifier.fillMaxSize()
         )
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthScreen(navController: NavController) {
-    // ----------------------------------------------------
-    // INÍCIO DA LÓGICA DA BARRA DE STATUS
-    // ----------------------------------------------------
-    // 1. Obtém o controlador da UI do sistema
     val systemUiController = rememberSystemUiController()
-    // A cor vermelha escura que se harmoniza com o gradiente
     val statusBarColor = Color(0xFF880000)
 
-    // 2. Aplica a cor da barra de status quando a tela é composta
     DisposableEffect(systemUiController) {
-        // Define a cor da barra de status
         systemUiController.setStatusBarColor(
             color = statusBarColor,
-            // Altera o esquema de cores dos ícones (ícones claros/escuros).
-            // Como a cor é escura, deixamos os ícones (texto, bateria) brancos (false)
             darkIcons = false
         )
-        // Limpeza: Restaura a cor padrão (opcional, mas boa prática)
-        onDispose {
-            // Pode restaurar a cor padrão ou a cor do tema
-            systemUiController.setStatusBarColor(
-                color = Color.Black, // Exemplo: volta para preto
-                darkIcons = false
-            )
-        }
+        // deixei vazio pq antes tirava a cor da barra de status do celular :)
+        onDispose {}
     }
-    // ----------------------------------------------------
-    // FIM DA LÓGICA DA BARRA DE STATUS
-    // ----------------------------------------------------
     
     var isLogin by remember { mutableStateOf(true) }
 
@@ -127,7 +116,10 @@ fun AuthScreen(navController: NavController) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = if (isLogin) "Bem Vindo de Volta" else "Bem Vindo a Nosso App",
+                    text = if (isLogin)
+                        stringResource(R.string.welcome_back)
+                    else
+                        stringResource(R.string.welcome_new),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
@@ -147,7 +139,7 @@ fun AuthScreen(navController: NavController) {
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Senha") },
+                    label = { Text(stringResource(R.string.password)) },
                     visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -156,12 +148,12 @@ fun AuthScreen(navController: NavController) {
 
                 // Botão principal
                 Button(
-                    onClick = { /* ação de login ou registro */ },
+                    onClick = { navController.navigate("profile") },
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                     modifier = Modifier.fillMaxWidth(0.6f)
                 ) {
                     Text(
-                        text = if (isLogin) "Entrar" else "Registrar-se",
+                        text = if (isLogin) stringResource(R.string.login_button) else stringResource(R.string.register_button),
                         color = Color.White
                     )
                 }
@@ -192,14 +184,14 @@ fun AuthScreen(navController: NavController) {
                         ),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        Text(text = "Registro")
+                        Text(text = stringResource(R.string.register))
                     }
                 }
 
                 Spacer(modifier = Modifier.height(30.dp))
 
                 // --- CARROSSEL SLIDER INSERIDO AQUI ---
-                ImageCarousel(imageList = carouselImages)
+                ImageCarousel()
             }
         }
     }

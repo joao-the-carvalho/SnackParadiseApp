@@ -15,6 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.snackparadise.presentation.components.AppScaffold
+import androidx.compose.ui.res.stringResource
+import com.snackparadise.R
 
 @Composable
 fun PontosScreen(navController: NavController) {
@@ -32,14 +34,14 @@ fun PontosScreen(navController: NavController) {
 
             item {
                 Text(
-                    "Programa de Pontos SnackParadise",
+                    stringResource(R.string.points_program),
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFB00000),
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    "A cada R$1 gasto você ganha 1 ponto. Acumule e troque por recompensas!",
+                    stringResource(R.string.points_description),
                     fontSize = 14.sp,
                     color = Color.Gray,
                     textAlign = TextAlign.Center,
@@ -64,7 +66,7 @@ fun PontosScreen(navController: NavController) {
                             modifier = Modifier.padding(16.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text("⭐ Seus Pontos", fontWeight = FontWeight.Medium)
+                            Text(stringResource(R.string.your_points), fontWeight = FontWeight.Medium)
                             Text(
                                 "$pontos",
                                 fontWeight = FontWeight.Bold,
@@ -76,7 +78,7 @@ fun PontosScreen(navController: NavController) {
                                 colors = ButtonDefaults.buttonColors(Color(0xFFB00000)),
                                 modifier = Modifier.padding(top = 8.dp)
                             ) {
-                                Text("Simular Gastos", color = Color.White)
+                                Text(stringResource(R.string.simulate_spend), color = Color.White)
                             }
                         }
                     }
@@ -92,14 +94,14 @@ fun PontosScreen(navController: NavController) {
                             modifier = Modifier.padding(16.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text("\uD83C\uDFC6 Seu Nível", fontWeight = FontWeight.Medium)
+                            Text(stringResource(R.string.your_level), fontWeight = FontWeight.Medium)
                             Text(
                                 nivelAtual,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 24.sp,
                                 color = Color(0xFFB00000)
                             )
-                            Text("Prata em 250 pontos", color = Color.Gray, fontSize = 12.sp)
+                            Text(stringResource(R.string.silver_in), color = Color.Gray, fontSize = 12.sp)
                         }
                     }
                 }
@@ -108,7 +110,7 @@ fun PontosScreen(navController: NavController) {
             // NÍVEIS DE FIDELIDADE
             item {
                 Text(
-                    "Níveis de Fidelidade",
+                    stringResource(R.string.loyalty_levels),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFB00000),

@@ -11,20 +11,34 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.ShoppingBag
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.snackparadise.presentation.components.AppScaffold
+import com.snackparadise.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LandingScreen(navController: NavController) {
+    val systemUiController = rememberSystemUiController()
+    val statusBarColor = Color(0xFF880000)
 
+    DisposableEffect(systemUiController) {
+        systemUiController.setStatusBarColor(
+            color = statusBarColor,
+            darkIcons = false
+        )
+        // deixei vazio pq antes tirava a cor da barra de status do celular :)
+        onDispose {}
+    }
     val scroll = rememberScrollState()
 
     // usa o AppScaffold com menu lateral
@@ -48,14 +62,14 @@ fun LandingScreen(navController: NavController) {
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        "Bem-vindo ao Snack Paradise",
+                        stringResource(R.string.welcome_snack),
                         fontSize = 32.sp,
                         color = Color.Yellow,
                         fontWeight = FontWeight.ExtraBold
                     )
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "O seu paraíso dos lanches está aqui! Sabores únicos, ingredientes frescos e muito amor em cada mordida.",
+                        stringResource(R.string.welcome_subtitle),
                         color = Color.White,
                         fontSize = 14.sp,
                         modifier = Modifier.padding(horizontal = 24.dp),
@@ -88,7 +102,7 @@ fun LandingScreen(navController: NavController) {
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "Receba seus lanches favoritos no conforto da sua casa! Entrega rápida, segura e sempre quentinha.",
+                        stringResource(R.string.delivery_desc),
                         color = Color.White,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
@@ -114,13 +128,13 @@ fun LandingScreen(navController: NavController) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             Icons.Filled.ShoppingBag,
-                            contentDescription = "Retire",
+                            contentDescription = stringResource(R.string.order_delivery),
                             tint = Color.Yellow,
                             modifier = Modifier.size(40.dp)
                         )
                         Spacer(Modifier.width(8.dp))
                         Text(
-                            "Peça & Retire",
+                            stringResource(R.string.pickup),
                             color = Color.Yellow,
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Bold
@@ -128,19 +142,19 @@ fun LandingScreen(navController: NavController) {
                     }
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "Faça seu pedido online e retire na nossa loja sem filas ou esperas. Rápido e prático!",
+                        stringResource(R.string.pickup_desc),
                         color = Color.White
                     )
                     Spacer(Modifier.height(20.dp))
                     Text(
-                        "Sobre o Snack Paradise",
+                        stringResource(R.string.about_us),
                         color = Color.Yellow,
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "Fundado em 2020, o Snack Paradise nasceu do sonho de criar o melhor hambúrguer da cidade.",
+                        stringResource(R.string.about_desc),
                         color = Color.White
                     )
                     Spacer(Modifier.height(24.dp))
@@ -149,7 +163,7 @@ fun LandingScreen(navController: NavController) {
                         colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow),
                         shape = RoundedCornerShape(50)
                     ) {
-                        Text("Pedir para Retirar", color = Color.Black, fontWeight = FontWeight.Bold)
+                        Text(stringResource(R.string.order_pickup), color = Color.Black, fontWeight = FontWeight.Bold)
                     }
                 }
             }
@@ -173,14 +187,14 @@ fun LandingScreen(navController: NavController) {
                     )
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "Conheça Nossa História",
+                        stringResource(R.string.our_story),
                         fontSize = 26.sp,
                         color = Color.Black,
                         fontWeight = FontWeight.Bold
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "Assista ao vídeo e descubra como fazemos os melhores lanches da cidade!",
+                        stringResource(R.string.our_story_desc),
                         color = Color.Black,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
@@ -195,12 +209,12 @@ fun LandingScreen(navController: NavController) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(
                                 Icons.Filled.PlayArrow,
-                                contentDescription = "Assistir vídeo",
+                                contentDescription = stringResource(R.string.video_sub),
                                 tint = Color.White,
                                 modifier = Modifier.size(40.dp)
                             )
-                            Text("Vídeo Institucional", color = Color.White, fontWeight = FontWeight.Bold)
-                            Text("Clique para assistir", color = Color.White.copy(alpha = 0.7f))
+                            Text(stringResource(R.string.video_title), color = Color.White, fontWeight = FontWeight.Bold)
+                            Text(stringResource(R.string.video_sub), color = Color.White.copy(alpha = 0.7f))
                         }
                     }
                 }

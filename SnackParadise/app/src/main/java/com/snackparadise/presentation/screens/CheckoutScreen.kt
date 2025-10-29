@@ -9,34 +9,46 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.snackparadise.R
 import com.snackparadise.data.model.MenuItem
 import com.snackparadise.presentation.components.AppScaffold
+import com.snackparadise.presentation.nav.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CheckoutScreen(
     navController: NavController,
-    cartItems: List<MenuItem> // itens selecionados do menu
+    cartItems: List<MenuItem>
 ) {
-    AppScaffold(navController = navController, selectedItem = "Pontos") {
+    AppScaffold(navController = navController, selectedItem = "checkout") {
         var name by remember { mutableStateOf("") }
         var address by remember { mutableStateOf("") }
         var number by remember { mutableStateOf("") }
         var complement by remember { mutableStateOf("") }
 
-        // dropdown states
         var atendimentoExpanded by remember { mutableStateOf(false) }
         var pagamentoExpanded by remember { mutableStateOf(false) }
+        val optionYes = stringResource(R.string.option_yes)
+        val optionDebit = stringResource(R.string.option_debit)
 
-        var atendimentoSelecionado by remember { mutableStateOf("Sim") }
-        var pagamentoSelecionado by remember { mutableStateOf("Débito") }
+        var atendimentoSelecionado by remember { mutableStateOf(optionYes) }
+        var pagamentoSelecionado by remember { mutableStateOf(optionDebit) }
 
-        val atendimentoOptions = listOf("Sim", "Não")
-        val pagamentoOptions = listOf("Débito", "Crédito", "Pix", "Dinheiro")
+        val atendimentoOptions = listOf(
+            stringResource(R.string.option_yes),
+            stringResource(R.string.option_no)
+        )
+        val pagamentoOptions = listOf(
+            stringResource(R.string.option_debit),
+            stringResource(R.string.option_credit),
+            stringResource(R.string.option_pix),
+            stringResource(R.string.option_cash)
+        )
 
         Column(
             modifier = Modifier
@@ -56,7 +68,7 @@ fun CheckoutScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "ITENS SELECIONADOS",
+                        text = stringResource(R.string.checkout_selected_items),
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         color = Color.Black
@@ -64,7 +76,7 @@ fun CheckoutScreen(
                     Spacer(modifier = Modifier.height(8.dp))
                     cartItems.forEach { item ->
                         Text(
-                            text = "- ${item.name} (x1) - R$ ${item.price}",
+                            text = "- ${item.nameResId} (x1) - R$ ${item.price}",
                             color = Color.Black
                         )
                     }
@@ -81,7 +93,7 @@ fun CheckoutScreen(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "PAGAMENTO",
+                        text = stringResource(R.string.checkout_payment),
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         color = Color.Black
@@ -92,7 +104,7 @@ fun CheckoutScreen(
                     OutlinedTextField(
                         value = name,
                         onValueChange = { name = it },
-                        label = { Text("Nome") },
+                        label = { Text(stringResource(R.string.checkout_name)) },
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -100,7 +112,7 @@ fun CheckoutScreen(
                     OutlinedTextField(
                         value = address,
                         onValueChange = { address = it },
-                        label = { Text("Endereço") },
+                        label = { Text(stringResource(R.string.checkout_address)) },
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -108,7 +120,7 @@ fun CheckoutScreen(
                     OutlinedTextField(
                         value = number,
                         onValueChange = { number = it },
-                        label = { Text("Número") },
+                        label = { Text(stringResource(R.string.checkout_number)) },
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -116,18 +128,16 @@ fun CheckoutScreen(
                     OutlinedTextField(
                         value = complement,
                         onValueChange = { complement = it },
-                        label = { Text("Complemento") },
+                        label = { Text(stringResource(R.string.checkout_complement)) },
                         modifier = Modifier.fillMaxWidth()
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // dropdowns
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-
                         // Atendimento Preferencial
                         ExposedDropdownMenuBox(
                             expanded = atendimentoExpanded,
@@ -136,10 +146,12 @@ fun CheckoutScreen(
                         ) {
                             OutlinedTextField(
                                 value = atendimentoSelecionado,
-                                onValueChange = { },
+                                onValueChange = {},
                                 readOnly = true,
-                                label = { Text("Atendimento Preferencial") },
-                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = atendimentoExpanded) },
+                                label = { Text(stringResource(R.string.checkout_preferential_service)) },
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = atendimentoExpanded)
+                                },
                                 modifier = Modifier.fillMaxWidth()
                             )
                             ExposedDropdownMenu(
@@ -168,10 +180,12 @@ fun CheckoutScreen(
                         ) {
                             OutlinedTextField(
                                 value = pagamentoSelecionado,
-                                onValueChange = { },
+                                onValueChange = {},
                                 readOnly = true,
-                                label = { Text("Forma de Pagamento") },
-                                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = pagamentoExpanded) },
+                                label = { Text(stringResource(R.string.checkout_payment_method)) },
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = pagamentoExpanded)
+                                },
                                 modifier = Modifier.fillMaxWidth()
                             )
                             ExposedDropdownMenu(
@@ -194,14 +208,11 @@ fun CheckoutScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Button(
-                        onClick = {
-                            // ação de finalizar pedido
-                        },
+                        onClick = { navController.navigate("confirma")},
                         colors = ButtonDefaults.buttonColors(Color(0xFFB00000)),
-                        modifier = Modifier
-                            .fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("Finalizar Pedido")
+                        Text(stringResource(R.string.checkout_finalize_order))
                     }
                 }
             }

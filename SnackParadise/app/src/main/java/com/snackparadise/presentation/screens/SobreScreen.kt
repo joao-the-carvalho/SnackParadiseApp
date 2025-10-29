@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,13 +59,13 @@ fun SobreScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Conheça a SnackParadise",
+                        text = stringResource(R.string.about_title),
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp,
                         color = Color(0xFF8B0000)
                     )
                     Text(
-                        text = "Sabor, qualidade e inovação desde 2024",
+                        text = stringResource(R.string.about_subtitle),
                         color = Color.Gray,
                         modifier = Modifier.padding(top = 4.dp)
                     )
@@ -92,19 +93,19 @@ fun SobreScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Nossa História",
+                        text = stringResource(R.string.about_our_story),
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp,
                         color = Color(0xFF8B0000)
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Somos a Snack Paradise ou SP, um restaurante que busca primariamente o sabor, o fácil acesso e a memorabilidade em nossas receitas!",
+                        text = stringResource(R.string.about_story_text1),
                         textAlign = TextAlign.Center
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Sendo oficialmente fundada em 2024, o projeto nasceu de um trabalho do curso de Desenvolvimento de Sistemas.",
+                        text = stringResource(R.string.about_story_text2),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -112,19 +113,43 @@ fun SobreScreen(navController: NavController) {
 
             // seção: valores
             Text(
-                text = "Nossos Valores",
+                text = stringResource(R.string.about_our_values),
                 color = Color(0xFF8B0000),
                 fontWeight = FontWeight.Bold,
                 fontSize = 22.sp,
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                ValorCard("🤝", "Integridade", "Transparência e honestidade em cada interação")
-                ValorCard("❤️", "Respeito", "Valorização de funcionários, clientes e parceiros")
-                ValorCard("💡", "Inovação", "Busca constante por soluções gastronômicas únicas")
-                ValorCard("⭐", "Inclusividade", "Ambiente acolhedor e acessível para todos")
-                ValorCard("🎯", "Qualidade", "Compromisso com a excelência em cada produto")
-                ValorCard("🌱", "Crescimento", "Evolução contínua com responsabilidade social")
+                ValorCard(
+                    emoji = "🤝",
+                    titulo = stringResource(R.string.value_integrity),
+                    desc = stringResource(R.string.value_integrity_desc)
+                )
+                ValorCard(
+                    emoji = "❤️",
+                    titulo = stringResource(R.string.value_respect),
+                    desc = stringResource(R.string.value_respect_desc)
+                )
+                ValorCard(
+                    emoji = "💡",
+                    titulo = stringResource(R.string.value_innovation),
+                    desc = stringResource(R.string.value_innovation_desc)
+                )
+                ValorCard(
+                    emoji = "⭐",
+                    titulo = stringResource(R.string.value_inclusivity),
+                    desc = stringResource(R.string.value_inclusivity_desc)
+                )
+                ValorCard(
+                    emoji = "🎯",
+                    titulo = stringResource(R.string.value_quality),
+                    desc = stringResource(R.string.value_quality_desc)
+                )
+                ValorCard(
+                    emoji = "🌱",
+                    titulo = stringResource(R.string.value_growth),
+                    desc = stringResource(R.string.value_growth_desc)
+                )
             }
 
             // seção: missão
@@ -141,14 +166,14 @@ fun SobreScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "🎯 Missão",
+                        text = stringResource(R.string.about_mission_title),
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF8B0000),
                         fontSize = 20.sp
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Proporcionar experiências gastronômicas memoráveis com sabores únicos, qualidade e tecnologia inovadora.",
+                        text = stringResource(R.string.about_mission_text),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -156,17 +181,29 @@ fun SobreScreen(navController: NavController) {
 
             // seção: números
             Text(
-                text = "SnackParadise em Números",
+                text = stringResource(R.string.about_in_numbers),
                 color = Color(0xFF8B0000),
                 fontWeight = FontWeight.Bold,
                 fontSize = 22.sp,
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                NumeroCard("2024", "Ano de Fundação")
-                NumeroCard("100", "% Satisfação")
-                NumeroCard("6", "Horas de Atendimento")
-                NumeroCard("5", "Estrelas de Avaliação")
+                NumeroCard(
+                    valor = stringResource(R.string.about_founded_year),
+                    descricao = stringResource(R.string.about_founded_label)
+                )
+                NumeroCard(
+                    valor = stringResource(R.string.about_satisfaction),
+                    descricao = stringResource(R.string.about_satisfaction_label)
+                )
+                NumeroCard(
+                    valor = stringResource(R.string.about_hours),
+                    descricao = stringResource(R.string.about_hours_label)
+                )
+                NumeroCard(
+                    valor = stringResource(R.string.about_rating),
+                    descricao = stringResource(R.string.about_rating_label)
+                )
             }
 
             Spacer(Modifier.height(16.dp))
