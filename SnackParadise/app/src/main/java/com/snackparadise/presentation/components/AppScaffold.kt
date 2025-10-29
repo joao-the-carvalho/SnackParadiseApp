@@ -11,6 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
+import com.snackparadise.R
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +34,7 @@ fun AppScaffold(
             ) {
                 Spacer(modifier = Modifier.height(30.dp))
                 Text(
-                    text = "Snack Paradise",
+                    text = stringResource(R.string.app_name),
                     style = MaterialTheme.typography.titleLarge,
                     color = Color.White,
                     modifier = Modifier
@@ -40,20 +42,20 @@ fun AppScaffold(
                         .align(Alignment.CenterHorizontally)
                 )
                 Divider(color = Color.White.copy(alpha = 0.3f))
-                DrawerItem("Tela Inicial", selectedItem == "landing") { navController.navigate("landing") }
-                DrawerItem("Menu", selectedItem == "menu") { navController.navigate("menu") }
-                DrawerItem("Login/Registro", selectedItem == "logreg") { navController.navigate("logreg") }
-                DrawerItem("Perfil", selectedItem == "profile") { navController.navigate("profile") }
-                DrawerItem("Sobre Nós", selectedItem == "sobre") { navController.navigate("sobre") }
-                DrawerItem("Checkout", selectedItem == "checkout") { navController.navigate("checkout") }
-                DrawerItem("Pontos", selectedItem == "pontos"){navController.navigate("pontos")}
+                DrawerItem(stringResource(R.string.drawer_home), selectedItem == "landing") { navController.navigate("landing") }
+                DrawerItem(stringResource(R.string.drawer_login), selectedItem == "auth") { navController.navigate("auth") }
+                DrawerItem(stringResource(R.string.drawer_menu), selectedItem == "menu") { navController.navigate("menu") }
+                DrawerItem(stringResource(R.string.drawer_profile), selectedItem == "profile") { navController.navigate("profile") }
+                DrawerItem(stringResource(R.string.drawer_about), selectedItem == "sobre") { navController.navigate("sobre") }
+                /*DrawerItem(stringResource(R.string.drawer_checkout), selectedItem == "checkout") { navController.navigate("checkout") } não é pra isso aqui aparecer no video*/
+                DrawerItem(stringResource(R.string.drawer_points), selectedItem == "pontos"){ navController.navigate("pontos") }
             }
         }
     ) {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = {}, // removido o título
+                    title = {},
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {

@@ -8,18 +8,15 @@ class MenuRepositoryImpl(
     private val assetsRepository: AssetsRepository
 ) : MenuRepository {
 
-    // pega todos os itens do menu
     override suspend fun getMenu(): List<MenuItem> {
         return assetsRepository.loadMenu()
     }
 
-    // filtra por categoria
     override suspend fun getMenuByCategory(category: String): List<MenuItem> {
-        return getMenu().filter { it.category.equals(category, ignoreCase = true) }
+        return getMenu()
     }
 
-    // pega todas as categorias únicas
     override suspend fun getCategories(): List<String> {
-        return getMenu().map { it.category }.distinct()
+        return emptyList()
     }
 }

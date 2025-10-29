@@ -30,9 +30,6 @@
                 val cartItems: List<MenuItem> by cartViewModel.cartItems.collectAsState()
                 CheckoutScreen(navController, cartItems = cartItems)
             }
-            composable(Screen.Logreg.route) {
-                AuthScreen(navController)
-            }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController)
             }
@@ -44,6 +41,9 @@
             }
             composable(Screen.Pontos.route){
                 PontosScreen(navController)
+            }
+            composable(Screen.Confirma.route){
+                ConfirmationScreen(navController)
             }
         }
 
