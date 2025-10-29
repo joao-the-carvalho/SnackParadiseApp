@@ -1,0 +1,241 @@
+<resources>
+    <string name="app_name">SnackParadise</string>
+
+    <!-- AuthScreen -->
+    <string name="welcome_back">Bem-vindo de volta</string>
+    <string name="welcome_new">Bem-vindo ao nosso app</string>
+    <string name="email">Email</string>
+    <string name="password">Senha</string>
+    <string name="login">Login</string>
+    <string name="register">Registrar</string>
+    <string name="login_button">Entrar</string>
+    <string name="register_button">Registrar-se</string>
+
+    <!-- LandingScreen -->
+    <string name="welcome_snack">Bem-vindo ao Snack Paradise</string>
+    <string name="welcome_subtitle">O seu paraíso dos lanches está aqui! Sabores únicos, ingredientes frescos e muito amor em cada mordida.</string>
+    <string name="delivery">Delivery</string>
+    <string name="delivery_desc">Receba seus lanches favoritos no conforto da sua casa! Entrega rápida, segura e sempre quentinha.</string>
+    <string name="order_delivery">Pedir Delivery</string>
+    <string name="pickup">Peça e Retire</string>
+    <string name="pickup_desc">Faça seu pedido online e retire na loja sem filas. Rápido e prático!</string>
+    <string name="about_us">Sobre o Snack Paradise</string>
+    <string name="about_desc">Fundado em 2020, o Snack Paradise nasceu do sonho de criar o melhor hambúrguer da cidade.</string>
+    <string name="order_pickup">Pedir para Retirar</string>
+    <string name="our_story">Conheça Nossa História</string>
+    <string name="our_story_desc">Assista ao vídeo e descubra como fazemos os melhores lanches da cidade!</string>
+    <string name="video_title">Vídeo Institucional</string>
+    <string name="video_sub">Clique para assistir</string>
+
+    <!-- CheckoutScreen -->
+    <string name="selected_items">ITENS SELECIONADOS</string>
+    <string name="payment">PAGAMENTO</string>
+    <string name="name">Nome</string>
+    <string name="address">Endereço</string>
+    <string name="number">Número</string>
+    <string name="complement">Complemento</string>
+    <string name="preferential_service">Atendimento Preferencial</string>
+    <string name="payment_method">Forma de Pagamento</string>
+    <string name="finish_order">Finalizar Pedido</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="debit">Débito</string>
+    <string name="credit">Crédito</string>
+    <string name="pix">Pix</string>
+    <string name="cash">Dinheiro</string>
+
+    <!-- PontosScreen -->
+    <string name="points_program">Programa de Pontos SnackParadise</string>
+    <string name="points_description">A cada R$1 gasto você ganha 1 ponto. Acumule e troque por recompensas!</string>
+    <string name="your_points">⭐ Seus Pontos</string>
+    <string name="simulate_spend">Simular Gastos</string>
+    <string name="your_level">🏆 Seu Nível</string>
+    <string name="silver_in">Prata em 250 pontos</string>
+    <string name="loyalty_levels">Níveis de Fidelidade</string>
+    <string name="bronze">Bronze</string>
+    <string name="silver">Prata</string>
+    <string name="gold">Ouro</string>
+    <string name="diamond">Diamante</string>
+    <string name="exchange_points">Troque Seus Pontos</string>
+    <string name="history_points">Histórico de Pontos</string>
+    <string name="date">Data</string>
+    <string name="description">Descrição</string>
+    <string name="points">Pontos</string>
+    <string name="balance">Saldo</string>
+    <string name="exchange">Trocar</string>
+    <string name="level_bronze_name">🥉 Bronze</string>
+    <string name="level_bronze_range">0 - 249 points</string>
+    <string name="level_bronze_benefit1">5% discount on orders over R$30</string>
+    <string name="level_bronze_benefit2">Special offers</string>
+    <string name="level_silver_name">🥈 Silver</string>
+    <string name="level_silver_range">250 - 499 points</string>
+    <string name="level_silver_benefit1">10% discount on orders over R$25</string>
+    <string name="level_silver_benefit2">Free shipping on orders over R$40</string>
+    <string name="level_gold_name">🥇 Gold</string>
+    <string name="level_gold_range">500 - 999 points</string>
+    <string name="level_gold_benefit1">15% discount</string>
+    <string name="level_gold_benefit2">Free shipping</string>
+    <string name="level_gold_benefit3">Priority service</string>
+    <string name="level_diamond_name">💎 Diamond</string>
+    <string name="level_diamond_range">1000+ points</string>
+    <string name="level_diamond_benefit1">20% discount</string>
+    <string name="level_diamond_benefit2">VIP menu</string>
+    <string name="level_diamond_benefit3">24/7 support</string>
+    <string name="reward_burger">🍔 Classic Burger</string>
+    <string name="reward_fries">🍟 Large Fries</string>
+    <string name="reward_soda">🥤 500ml Soda</string>
+    <string name="reward_combo_simple">🍟🍔 Simple Combo</string>
+    <string name="reward_dessert">🍰 Special Dessert</string>
+    <string name="reward_combo_family">🎁 Family Combo</string>
+
+    <!-- ProfileScreen -->
+    <string name="my_profile">Meu Perfil</string>
+    <string name="change_photo">Alterar Foto</string>
+    <string name="personal_info">Informações Pessoais</string>
+    <string name="username">Usuário</string>
+    <string name="email_label">E-mail</string>
+    <string name="edit">Editar</string>
+    <string name="delivery_address">Endereço de Entrega</string>
+    <string name="zip_code">CEP</string>
+    <string name="neighborhood">Bairro</string>
+    <string name="city">Cidade</string>
+    <string name="security">Segurança</string>
+    <string name="current_password">Senha Atual</string>
+    <string name="new_password">Nova Senha</string>
+    <string name="confirm_password">Confirmar Nova Senha</string>
+    <string name="change_password">Alterar Senha</string>
+    <string name="my_orders">Meus Pedidos</string>
+    <string name="no_orders">Nenhum pedido realizado ainda.</string>
+    <string name="track_delivery">Acompanhar Entrega</string>
+    <string name="no_delivery">Nenhuma entrega em andamento no momento.</string>
+        <!-- Drawer -->
+        <string name="drawer_home">Tela Inicial</string>
+        <string name="drawer_menu">Menu</string>
+        <string name="drawer_login">Login/Registro</string>
+        <string name="drawer_profile">Perfil</string>
+        <string name="drawer_about">Sobre Nós</string>
+        <string name="drawer_checkout">Checkout</string>
+        <string name="drawer_points">Pontos</string>
+
+        <!-- Checkout -->
+        <string name="checkout_selected_items">Itens Selecionados</string>
+        <string name="checkout_payment">Pagamento</string>
+        <string name="checkout_name">Nome</string>
+        <string name="checkout_address">Endereço</string>
+        <string name="checkout_number">Número</string>
+        <string name="checkout_complement">Complemento</string>
+        <string name="checkout_preferential_service">Atendimento Preferencial</string>
+        <string name="checkout_payment_method">Forma de Pagamento</string>
+        <string name="checkout_finalize_order">Finalizar Pedido</string>
+
+        <!-- Options -->
+        <string name="option_yes">Sim</string>
+        <string name="option_no">Não</string>
+        <string name="option_debit">Débito</string>
+        <string name="option_credit">Crédito</string>
+        <string name="option_pix">Pix</string>
+        <string name="option_cash">Dinheiro</string>
+
+    <!-- imagem -->
+    <string name="slider1">1.png</string>
+    <string name="slider2">2.png</string>
+    <string name="slider3">3.png</string>
+    <string name="carousel_description">Imagem rotativa sobre o Snack Paradise</string>
+
+    <!-- Categorias do Menu -->
+    <string name="category_burgers">Lanches</string>
+    <string name="category_sides">Acompanhamentos</string>
+    <string name="category_drinks">Bebidas</string>
+
+    <!-- Itens do Menu - Lanches -->
+    <string name="item_sunset_burger">Sunset Burguer</string>
+    <string name="item_sunset_burger_desc">Bacon, cheddar, Hamburguer grelhado, Molho Barbecue, Pão com gergelim</string>
+
+    <string name="item_beach_burger">Hamburguer Praiano</string>
+    <string name="item_beach_burger_desc">Alface, cebola, hamburguer grelhado, pão com gergelim, picles, tomate</string>
+
+    <string name="item_sun_beach_snack">Snack Praia do Sol</string>
+    <string name="item_sun_beach_snack_desc">Alface, bacon, cebola roxa, cheddar, hamburguer grelhado, pão com gergilim, tomate</string>
+
+    <string name="item_palm_burger">Palmeira Burguer</string>
+    <string name="item_palm_burger_desc">Alface, cebola, coentro, molho bechamel vegano, pão com gergilim, seitan (hamburguer vegano), tomate</string>
+
+    <string name="item_tropical_burger">Hamburguer Tropical</string>
+    <string name="item_tropical_burger_desc">Bacon, cheddar, Hamburguer grelhado, Molho Barbecue, Pão com gergilim</string>
+
+    <string name="item_healthy_vacation">Férias Saudaveis</string>
+    <string name="item_healthy_vacation_desc">Alface, cebola, hamburguer grelhado, pão com gergelim, picles, tomate</string>
+
+    <!-- Itens do Menu - Acompanhamentos -->
+    <string name="item_fries_small">Batata tam.P</string>
+    <string name="item_fries_medium">Batata tam.M</string>
+    <string name="item_fries_large">Batata tam.G</string>
+
+    <!-- Itens do Menu - Bebidas -->
+    <string name="item_coca_cola">Coca-cola</string>
+    <string name="item_pepsi">Pepsi</string>
+    <string name="item_guarana">Guarana</string>
+    <string name="item_fanta_orange">Fanta Laranja</string>
+    <string name="item_fanta_grape">Fanta Uva</string>
+    <string name="item_unknown">Item desconhecido</string>
+
+    <!-- Botão pra levar pro checkout enquanto não tem carrinho e Toast de exemplo -->
+    <string name="adding_to_cart">Adicionando ao Carrinhp</string>
+    <string name="go_to_checkout">Ir ao Checkout</string>
+
+    <!-- OrderTypeScreen -->
+    <string name="order_type_title">Como você gostaria\ndo seu pedido hoje?</string>
+    <string name="order_type_delivery">Delivery</string>
+    <string name="order_type_pickup">Peça e Retire</string>
+    <string name="burger_image_desc">Hambúrguer</string>
+
+    <!-- AboutScreen (SobreScreen) -->
+    <!-- Tela Sobre -->
+    <string name="about_title">Conheça a SnackParadise</string>
+    <string name="about_subtitle">Sabor, qualidade e inovação desde 2024</string>
+    <string name="about_our_story">Nossa História</string>
+    <string name="about_story_text1">Somos a Snack Paradise ou SP, um restaurante que busca primariamente o sabor, o fácil acesso e a memorabilidade em nossas receitas!</string>
+    <string name="about_story_text2">Sendo oficialmente fundada em 2024, o projeto nasceu de um trabalho do curso de Desenvolvimento de Sistemas.</string>
+
+    <string name="about_our_values">Nossos Valores</string>
+    <string name="value_integrity">Integridade</string>
+    <string name="value_integrity_desc">Transparência e honestidade em cada interação</string>
+    <string name="value_respect">Respeito</string>
+    <string name="value_respect_desc">Valorização de funcionários, clientes e parceiros</string>
+    <string name="value_innovation">Inovação</string>
+    <string name="value_innovation_desc">Busca constante por soluções gastronômicas únicas</string>
+    <string name="value_inclusivity">Inclusividade</string>
+    <string name="value_inclusivity_desc">Ambiente acolhedor e acessível para todos</string>
+    <string name="value_quality">Qualidade</string>
+    <string name="value_quality_desc">Compromisso com a excelência em cada produto</string>
+    <string name="value_growth">Crescimento</string>
+    <string name="value_growth_desc">Evolução contínua com responsabilidade social</string>
+
+    <string name="about_mission_title">🎯 Missão</string>
+    <string name="about_mission_text">Proporcionar experiências gastronômicas memoráveis com sabores únicos, qualidade e tecnologia inovadora.</string>
+
+    <string name="about_in_numbers">SnackParadise em Números</string>
+    <string name="about_founded_year">2024</string>
+    <string name="about_founded_label">Ano de Fundação</string>
+    <string name="about_satisfaction">100</string>
+    <string name="about_satisfaction_label">% Satisfação</string>
+    <string name="about_hours">6</string>
+    <string name="about_hours_label">Horas de Atendimento</string>
+    <string name="about_rating">5</string>
+    <string name="about_rating_label">Estrelas de Avaliação</string>
+
+    <string name="order_confirmed_title">Pedido Confirmado!</string>
+    <string name="order_confirmed_subtitle">Seu pedido foi recebido e está sendo preparado.</string>
+    <string name="order_number_placeholder">Nº do Pedido: ---</string>
+    <string name="order_info_title">Informações do Pedido:</string>
+    <string name="order_status_label">Status:</string>
+    <string name="order_status_value">Em preparação</string>
+    <string name="order_delivery_label">Previsão de entrega:</string>
+    <string name="order_delivery_value">30-45 minutos</string>
+    <string name="order_track_label">Acompanhe:</string>
+    <string name="order_track_value">Acesse "Meus Pedidos" no seu perfil</string>
+    <string name="order_updates_text">Você receberá atualizações sobre o status do seu pedido.</string>
+    <string name="back_to_menu">Voltar ao Menu</string>
+    <string name="view_my_orders">Ver Meus Pedidos</string>
+
+</resources>
