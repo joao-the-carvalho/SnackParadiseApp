@@ -1,15 +1,14 @@
-package com.snackparadise.presentation.viewmodel
-
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.snackparadise.data.local.AssetsRepository
-import com.snackparadise.data.repository.MenuRepositoryImpl
+import com.snackparadise.presentation.viewmodel.MenuViewModel
 
 class MenuViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val assetsRepo = AssetsRepository(context)
-        val repo = MenuRepositoryImpl(assetsRepo)
-        return MenuViewModel(repo) as T
+        if (modelClass.isAssignableFrom(MenuViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MenuViewModel(context) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
